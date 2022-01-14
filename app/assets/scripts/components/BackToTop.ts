@@ -1,27 +1,27 @@
 class BackToTop {
-    backToTopBtn;
+    backToTopBtn: HTMLElement | null;
 
     constructor() {
-        this.backToTopBtn = document.querySelector('.o-backtotop')! as HTMLDivElement;
+        this.backToTopBtn = document.querySelector('.o-backtotop') as HTMLDivElement;
 
         this.event()
     }
 
     event() {
-        let self = this;
+        const self = this;
 
         window.onscroll = function () {
             self.scrollFunction();
         };
 
-        this.backToTopBtn.addEventListener("click", self.scrollOperations)
+        this.backToTopBtn?.addEventListener("click", self.scrollOperations)
     }
 
-    scrollFunction(){
+    scrollFunction() {
         if (document.documentElement.scrollTop > 80) {
-            this.backToTopBtn.classList.add('o-backtotop--active');
+            this.backToTopBtn?.classList.add('o-backtotop--active');
         } else {
-            this.backToTopBtn.classList.remove('o-backtotop--active');
+            this.backToTopBtn?.classList.remove('o-backtotop--active');
         }
     }
 

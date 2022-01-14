@@ -5,6 +5,16 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+const pages = [
+    {name: 'index', scripts: ['common']},
+    {name: 'homepage', scripts: ['common', 'app']},
+    {name: 'about', scripts: ['common', 'about']},
+];
+
+const styleGuides = [
+    {name: 'button', scripts: ['common']},
+]
+
 module.exports = {
     entry: {
         'app': './app/assets/scripts/App.ts',
@@ -50,24 +60,6 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: `./app/views/index.pug`,
-            filename: `index.html`,
-            chunks: ['common'],
-            minify: false
-        }),
-        new HtmlWebpackPlugin({
-            template: `./app/views/homepage.pug`,
-            filename: `homepage.html`,
-            chunks: ['common', 'app'],
-            minify: false
-        }),
-        new HtmlWebpackPlugin({
-            template: `./app/views/about.pug`,
-            filename: `about.html`,
-            chunks: ['common', 'about'],
-            minify: false
-        }),
         new ForkTsCheckerWebpackPlugin(),
         new CopyPlugin({
             patterns: [{from: 'app/assets', to: 'assets'}]
@@ -75,7 +67,24 @@ module.exports = {
         new ESLintPlugin({
             extensions: ['.tsx', '.ts', '.js'],
             exclude: 'node_modules',
-            context: 'src'
+            context: 'app'
         })
-    ]
+    ].concat(
+        pages.map((page) =>
+            new HtmlWebpackPlugin({
+                template: `./app/views/${page.name}.pug`,
+                filename: `${page.name}.html`,
+                chunks: page.scripts,
+                minify: false
+            })
+        ),
+        styleGuides.map((styleGuide) =>
+            new HtmlWebpackPlugin({
+                template: `./app/views/style-guides/${styleGuide.name}.pug`,
+                filename: `style-guide-${styleGuide.name}.html`,
+                chunks: styleGuide.scripts,
+                minify: false
+            })
+        ),
+    ),
 };

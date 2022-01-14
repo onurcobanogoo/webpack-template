@@ -1,11 +1,6 @@
 class Helper {
     constructor() {
         this.exampleHelper();
-
-        this.event();
-    }
-
-    event() {
     }
 
     exampleHelper() {
