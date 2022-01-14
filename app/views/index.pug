@@ -2,13 +2,15 @@ include base/head
 
 -
     var pages = [
-        {label: 'Homepage', href: 'homepage.html'}
+        {label: 'Homepage', href: 'homepage.html'},
+        {label: 'About', href: 'about.html'},
     ]
 doctype html
 html(lang='tr')
     head
         +head()
         title Webpack Template
+
     body
         ul.o-presentation__list
             each page in pages

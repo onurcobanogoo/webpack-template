@@ -3,6 +3,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -38,10 +39,12 @@ module.exports = {
             },
             {
                 test: /\.pug$/,
-                use: 'pug-loader',
-                options: {
-                    pretty: true
-                }
+                use: {
+                    loader: 'pug-loader',
+                    options: {
+                        pretty: true
+                    }
+                },
             }
         ]
     },
@@ -68,6 +71,11 @@ module.exports = {
         new ForkTsCheckerWebpackPlugin(),
         new CopyPlugin({
             patterns: [{from: 'app/assets', to: 'assets'}]
+        }),
+        new ESLintPlugin({
+            extensions: ['.tsx', '.ts', '.js'],
+            exclude: 'node_modules',
+            context: 'src'
         })
     ]
 };
