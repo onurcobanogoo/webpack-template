@@ -1,0 +1,15 @@
+// Variables
+@import "variables/colors";
+@import "variables/fonts";
+
+// Base
+@import "base/reset";
+@import "base/global";
+
+// Components
+@import "components/o-btn";
+@import "components/o-image";
+
+//Pages
+@import "pages/p-homepage";
+@import "pages/p-about";
