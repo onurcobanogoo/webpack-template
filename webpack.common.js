@@ -25,7 +25,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist'),
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     module: {
         rules: [
@@ -38,14 +38,14 @@ module.exports = {
                 type: 'asset/resource',
             },
             {
-                test: /\.tsx?$/,
+                test: /\.[jt]sx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'ts-loader',
+                    loader: "babel-loader",
                     options: {
-                        transpileOnly: true
-                    }
-                }
+                        presets: ["@babel/preset-env", "@babel/preset-typescript"],
+                    },
+                },
             },
             {
                 test: /\.pug$/,
