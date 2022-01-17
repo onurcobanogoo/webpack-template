@@ -1,7 +1,7 @@
 import Helper from './components/Helper';
-import BackToTop from "./components/BackToTop";
+import BackToTop from './components/BackToTop';
 
-import '../styles/styles.scss'
+import '../styles/styles.scss';
 
 const hasHelper = new Helper();
 hasHelper.exampleHelper();

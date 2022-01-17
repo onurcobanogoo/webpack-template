@@ -1,11 +1,11 @@
 class Helper {
-    constructor() {
-        this.exampleHelper();
-    }
+  constructor() {
+    this.exampleHelper();
+  }
 
-    exampleHelper() {
-        console.log("Example helper work!");
-    }
+  exampleHelper() {
+    console.log('Example helper work!');
+  }
 }
 
 export default Helper;
