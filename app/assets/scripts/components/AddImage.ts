@@ -1,4 +1,4 @@
-import testImage from '../../images/test-image.jpg';
+import testImage from '../../assets/images/test-image.jpg';
 
 class AddImage {
   render() {
