@@ -1,21 +1,18 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   output: {
-    filename: '[name].[contenthash].js',
-    chunkFilename: '[id].[contenthash].js'
+    filename: 'assets/scripts/[name].bundle.js',
+    chunkFilename: 'assets/scripts/[id].bundle.js'
   },
   optimization: {
     minimize: true,
-    splitChunks: {
-      chunks: 'all',
-      minSize: 3000
-    }
+    minimizer: [new CssMinimizerPlugin(), '...']
   },
   module: {
     rules: [
@@ -32,8 +29,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css'
+      filename: 'assets/styles/[name].bundle.css',
+      chunkFilename: 'assets/styles/[id].bundle.css'
     })
   ]
 });

@@ -29,11 +29,17 @@ module.exports = {
     rules: [
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[name][ext]'
+        }
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/images/[name][ext]'
+        }
       },
       {
         test: /\.[jt]sx?$/,
@@ -60,7 +66,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin(),
     new CopyPlugin({
-      patterns: [{ from: 'app/assets', to: 'assets' }]
+      patterns: [{ from: './app/assets/images', to: 'assets/images' }]
     }),
     new ESLintPlugin({
       extensions: ['.tsx', '.ts', '.js'],
